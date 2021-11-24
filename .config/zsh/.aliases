@@ -1,0 +1,11 @@
+weather () {
+    curl "https://wttr.in/${1}"
+}
+
+terraform@0.12 () {
+    /usr/local/opt/terraform@0.12/bin/terraform
+}
+
+terraform@0.13 () {
+    /usr/local/opt/terraform@0.13/bin/terraform
+}
