@@ -9,3 +9,11 @@ terraform@0.12 () {
 terraform@0.13 () {
     /usr/local/opt/terraform@0.13/bin/terraform
 }
+
+pans () {
+    ssh admindhenken@ansible.trustwave.com
+}
+
+ans () {
+    ssh ansible.tw-test.net
+}
