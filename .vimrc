@@ -149,6 +149,7 @@ endif
 
 " Set the color scheme.
 " colorscheme acme
+ colorscheme gruvbox
 set background=light
 
 " Specific colorscheme settings (must come after setting your colorscheme).
