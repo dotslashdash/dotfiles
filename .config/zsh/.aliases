@@ -17,3 +17,26 @@ pans () {
 ans () {
     ssh ansible.tw-test.net
 }
+
+pf () {
+    fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down
+}
+
+lf () {
+  file=$(fzf)
+  less $file
+}
+
+vf () {
+  file=$(fzf)
+  vim $file
+}
+
+tld () {
+  ls \
+  | awk -F. '{ print $1 }' \
+  | uniq -c \
+  | grep -v tld \
+  | sort > tld \
+  && less tld
+}
