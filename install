@@ -8,7 +8,7 @@ skip_system_packages="${1}"
 os_type="$(uname -s)"
 
 apt_packages="curl git iproute2 python3-pip ripgrep tmux vim-gtk zsh"
-apt_packages_optional="gnupg htop jq pass pwgen rsync shellcheck unzip ranger"
+apt_packages_optional="gnupg htop jq pass pwgen rsync shellcheck unzip ranger ack"
 
 brew_packages="diffutils git python ripgrep tmux vim zsh"
 brew_packages_optional="gnupg htop jq pass pwgen rsync shellcheck"
@@ -229,3 +229,64 @@ ln -fs "${clone_path}/.zshenv" "${HOME}/.zshenv" \
 if grep -qE "(Microsoft|microsoft|WSL)" /proc/version &>/dev/null; then
     sudo ln -fs "${clone_path}/etc/wsl.conf" /etc/wsl.conf
 fi
+
+###############################################################################
+# Change default shell to zsh
+###############################################################################
+
+[ "${os_type}" != "macOS" ] && chsh -s "$(command -v zsh)"
+
+# shellcheck disable=SC1090
+. "${HOME}/.config/zsh/.zprofile"
+
+###############################################################################
+# Install asdf and Node (Node is used for 1 Vim plugin)
+###############################################################################
+
+printf "\n\nInstalling asdf %s...\n" "${install_asdf_version}"
+
+rm -rf "${HOME}/.local/share/asdf"
+git clone --depth 1 https://github.com/asdf-vm/asdf.git --branch "${install_asdf_version}" \
+  "${HOME}/.local/share/asdf"
+
+# shellcheck disable=SC1090
+. "${HOME}/.local/share/asdf/asdf.sh"
+
+printf "\n\nInstalling node %s...\n" "${install_node_version}"
+
+"${HOME}/.local/share/asdf/bin/asdf" plugin add nodejs || true
+"${HOME}/.local/share/asdf/bin/asdf" install nodejs "${install_node_version}"
+"${HOME}/.local/share/asdf/bin/asdf" global nodejs "${install_node_version}"
+
+npm install --unsafe-perm=true --allow-root --global yarn
+
+###############################################################################
+# Install tmux plugins
+###############################################################################
+
+printf "\n\nInstalling tmux plugins...\n"
+
+export TMUX_PLUGIN_MANAGER_PATH="${HOME}/.tmux/plugins"
+"${HOME}/.tmux/plugins/tpm/bin/install_plugins"
+
+###############################################################################
+# Install Vim plugins
+###############################################################################
+
+printf "\n\nInstalling Vim plugins...\n"
+
+vim -E +PlugInstall +qall || true
+
+###############################################################################
+# Done!
+###############################################################################
+
+cat << EOF
+Everything was installed successfully!
+Check out the README file on GitHub to do 1 quick thing manually:
+https://github.com/nickjj/dotfiles#did-you-install-everything-successfully
+You can safely close this terminal.
+The next time you open your terminal zsh will be ready to go!
+EOF
+
+exit 0
