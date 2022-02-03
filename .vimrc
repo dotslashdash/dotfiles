@@ -9,6 +9,8 @@
 " Specify a directory for plugins.
 call plug#begin('~/.vim/plugged')
 
+Plug 'iamcco/markdown-preview.nvim'
+
 " VimWiki
 Plug 'vimwiki/vimwiki'
 
@@ -149,7 +151,7 @@ endif
 
 " Set the color scheme.
 " colorscheme acme
- colorscheme gruvbox
+colorscheme gruvbox
 set background=light
 
 " Specific colorscheme settings (must come after setting your colorscheme).
