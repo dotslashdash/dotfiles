@@ -3,11 +3,59 @@ weather () {
 }
 
 terraform@0.12 () {
-    /usr/local/opt/terraform@0.12/bin/terraform
+    /usr/local/opt/terraform@0.12/bin/terraform $@
 }
 
 terraform@0.13 () {
-    /usr/local/opt/terraform@0.13/bin/terraform
+    /usr/local/opt/terraform@0.13/bin/terraform $@
+}
+
+pans () {
+    ssh admindhenken@ansible.trustwave.com
+}
+
+ans () {
+    ssh ansible.tw-test.net
+}
+
+pf () {
+    fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down
+}
+
+lf () {
+  file=$(fzf)
+  less $file
+}
+
+vf () {
+  file=$(fzf)
+  vim $file
+}
+
+tld () {
+  ls \
+  | awk -F. '{ print $1 }' \
+  | uniq -c \
+  | grep -v tld \
+  | sort > tld \
+  && less tld
+}
+
+
+bastion () {
+  ssh centos@bastion.$1.trustwave.cloud
+}
+
+bastion::jump () {
+  ssh -J centos@bastion.$1.trustwave.cloud centos@$2
+}
+
+tf::os::secrets-dump () {
+  terraform output AWS_ACCESS_KEY >> .secrets && \
+    terraform output SECRET_ACCESS_KEY >> .secrets && \
+    terraform output |grep data >> .secrets
+  cat .secrets
+  rm .secrets
 }
 
 pans () {
