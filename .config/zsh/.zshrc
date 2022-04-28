@@ -36,6 +36,7 @@ setopt HIST_REDUCE_BLANKS    # Remove unnecessary blank lines.
 # Load aliases if they exist.
 [ -f "${XDG_CONFIG_HOME}/zsh/.aliases" ] && source "${XDG_CONFIG_HOME}/zsh/.aliases"
 [ -f "${XDG_CONFIG_HOME}/zsh/.aliases.local" ] && source "${XDG_CONFIG_HOME}/zsh/.aliases.local"
+[ -f "${XDG_CONFIG_HOME}/zsh/.aliases.trustwave" ] && source "${XDG_CONFIG_HOME}/zsh/.aliases.trustwave"
 
 # Use modern completion system. Other than enabling globdots for showing
 # hidden files, these ares values in the default generated zsh config.
