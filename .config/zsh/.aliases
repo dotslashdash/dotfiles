@@ -129,3 +129,21 @@ ssm.me () {
 dump-sec-rules () {
   grep aws_security_group ~/plan.txt | grep '\#' | grep -v changed | awk '{print $3}'
 }
+
+test-internet () {
+  if nc -zw1 192.168.1.254 80; then
+    echo "[+] connected to Waves AP"
+  else
+    echo "[-] no connection to Waves AP"
+  fi
+  if nc -zw1 192.168.1.1 80; then
+    echo "[+] connected to Waves"
+  else
+    echo "[-] no connection to Waves"
+  fi
+  if nc -zw1 google.com 443; then
+    echo "[+] connected to google.com"
+  else
+    echo "[-] no connection to google.com"
+  fi
+}
