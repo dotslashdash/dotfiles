@@ -1,4 +1,4 @@
-" -----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 " This config is targeted for Vim 8.1+ and expects you to have Plug installed.
 " -----------------------------------------------------------------------------
 
@@ -28,6 +28,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-obsession'
 "
 " Surround text easily.
+Plug 'tpope/vim-surround'
+
+" Better manage Vim sessions.
 Plug 'tpope/vim-surround'
 
 " Zoom in and out of a specific split pane (similar to tmux).

@@ -71,12 +71,12 @@ pf () {
 }
 
 lf () {
-  file=$(fzf)
+  file=$(pf)
   less $file
 }
 
 vf () {
-  file=$(fzf)
+  file=$(pf)
   vim $file
 }
 
@@ -91,4 +91,41 @@ tld () {
 
 ll () {
   ls -l $@
+}
+
+chimera () {
+  cd ~/trustkeeper-aws/chimera.$1
+}
+
+medusa () {
+  cd ~/trustkeeper-aws/medusa.$1
+}
+
+notes () {
+  cd ~/notes
+}
+
+s3_dump_details () {
+  terraform output -json | jq '{user: .archive_user_access_key_id.value, password: .archive_user_secret_access_key.value, endpoint: .s3_bucket_endpoint.value, bucket_id: .s3_bucket_id.value}'
+}
+
+tf::init () {
+  terraform apply -target='module.workspace["$1"].tfe_workspace.this'
+}
+
+
+ssm-account () {
+  grep $1 ~/notes/tw.aws.accounts.md
+}
+
+az-login () {
+  azure-login --profile adm
+}
+
+ssm.me () {
+  ssm-session $1 --profile adm
+}
+
+dump-sec-rules () {
+  grep aws_security_group ~/plan.txt | grep '\#' | grep -v changed | awk '{print $3}'
 }
