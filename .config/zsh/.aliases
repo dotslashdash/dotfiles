@@ -88,3 +88,7 @@ tld () {
   | sort > tld \
   && less tld
 }
+
+ll () {
+  ls -l $@
+}

@@ -26,6 +26,9 @@ Plug 'junegunn/fzf.vim'
 
 " Better manage Vim sessions.
 Plug 'tpope/vim-obsession'
+"
+" Surround text easily.
+Plug 'tpope/vim-surround'
 
 " Zoom in and out of a specific split pane (similar to tmux).
 Plug 'dhruvasagar/vim-zoom'
